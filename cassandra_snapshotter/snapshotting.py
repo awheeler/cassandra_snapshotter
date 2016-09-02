@@ -212,13 +212,8 @@ class RestoreWorker(object):
         table = r.group(3)
         host = key.name.split('/')[2]
         file = key.name.split('/')[-1]
-        prefix = '%s_' % host
 
-        # We don't want any host prefix because we restore from only one host
-        if self.local_restore:
-            prefix = ''
-
-        filename = "{}/{}/{}{}".format(keyspace, table, prefix, file)
+        filename = "{}/{}/{}".format(keyspace, table, file)
         key_full_path = os.path.join(self.restore_dir, filename)
 
         try:
